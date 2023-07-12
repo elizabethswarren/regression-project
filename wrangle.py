@@ -121,22 +121,22 @@ def scaled_data(train, validate, test):
 
 ##############################################  MODEL SPLIT    ##############################################
 
-def zillow_model_split(df):
+def zillow_model_split(train, validate, test):
     '''This function splits the train, validate, test datasets from the target variable to prepare it for model.'''
 
     #train_validate, test = train_test_split(df, test_size = .2, random_state=311)
 
    #train, validate = train_test_split(train_validate, test_size = .25, random_state=311)
 
-    X_train = train.drop(columns='value')
+    X_train = train.drop(columns=['value', 'county'])
 
     y_train = train.value
 
-    X_validate = validate.drop(columns='value')
+    X_validate = validate.drop(columns=['value', 'county'])
 
     y_validate = validate.value
 
-    X_test = test.drop(columns='value')
+    X_test = test.drop(columns=['value', 'county'])
 
     y_test = test.value
 
