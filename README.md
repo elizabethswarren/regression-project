@@ -15,10 +15,11 @@ My initial thoughts are that property value will be dependent on the counties th
   * Acquire data
     
   * Prepare data
-    * 
-    * Rename the FIPS values to county, state for easier readability.
+    * Rename the columns
+    * Change the data types of certain columns
+    * Rename the FIPS values to county for easier readability.
     * Drop the null values.
-       * Nulls accounted for !!!% of the data so I felt the best route was to simply drop them.
+       * Nulls accounted for 0.15% of the data so I felt the best route was to simply drop them.
     * Drop outliers which skewed the data.
        * Outliers were determined using the IQR.
        * Values for all columns that fell outside of their respective fences were dropped.
@@ -44,10 +45,9 @@ My initial thoughts are that property value will be dependent on the counties th
 |:-----------|:---------------|
 |Bedroom Count | Numbers of bedrooms|
 |Bathroom Count | Numbers of bathrooms|
-|Square Footage | Total square footage|
-|FIPS| Codes used to uniquely identify a county-level region|
-
-
+|Square Footage | Total calculated square footage|
+|Value | Assessed property value|
+|County| County in California where property is located|
 
 # Steps to Reproduce
   * Clone this repo
