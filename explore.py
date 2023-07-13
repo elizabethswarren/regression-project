@@ -74,8 +74,8 @@ def ols_lasso_tweedie(X_train, X_validate, y_train, y_validate, metric_df):
     }, ignore_index=True)
 
     print(f"""RMSE for OLS using LinearRegression
-        Training/In-Sample:  {rmse_train_ols} 
-        Validation/Out-of-Sample: {rmse_validate_ols}""")
+        Training/In-Sample:  {rmse_train_ols:.2f} 
+        Validation/Out-of-Sample: {rmse_validate_ols:.2f}\n""")
 
 
     
@@ -105,8 +105,8 @@ def ols_lasso_tweedie(X_train, X_validate, y_train, y_validate, metric_df):
     }, ignore_index=True)
 
     print(f"""RMSE for LassoLars
-        Training/In-Sample:  {rmse_train_lars} 
-        Validation/Out-of-Sample: {rmse_validate_lars}""")
+        Training/In-Sample:  {rmse_train_lars:.2f} 
+        Validation/Out-of-Sample: {rmse_validate_lars:.2f}\n""")
 
 
     # make and fit OLS model
@@ -135,8 +135,8 @@ def ols_lasso_tweedie(X_train, X_validate, y_train, y_validate, metric_df):
     }, ignore_index=True)
 
     print(f"""RMSE for TweedieRegressor
-        Training/In-Sample:  {rmse_train_tweedie} 
-        Validation/Out-of-Sample: {rmse_validate_tweedie}""")
+        Training/In-Sample:  {rmse_train_tweedie:.2f} 
+        Validation/Out-of-Sample: {rmse_validate_tweedie:.2f}\n""")
 
     return y_train, y_validate, metric_df
 

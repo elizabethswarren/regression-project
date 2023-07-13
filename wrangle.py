@@ -136,7 +136,7 @@ def zillow_model_split(train, validate, test):
 
     y_validate = validate.value
 
-    X_test = test.drop(columns=['value', 'county'])
+    X_test = test.drop(columns='value')
 
     y_test = test.value
 
