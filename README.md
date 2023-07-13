@@ -23,7 +23,6 @@ My initial thoughts are that property value will be dependent on the counties th
     * Drop outliers which skewed the data.
        * Outliers were determined using the IQR.
        * Values for all columns that fell outside of their respective fences were dropped.
-    * Scale the data.
     * Split the data into train, validate, split in a 50, 30, 20 split.
       
   * Explore the data
@@ -31,7 +30,6 @@ My initial thoughts are that property value will be dependent on the counties th
       * Is the county the property located related to the value?
       * Is bedroom count related to home value?
       * Is bathroom count related to home value?
-      * Are bedroom count and bathroom count related to one another? Can they be combined as a feature?
       * Is square footage of the property related to home value?
         
   * Develop a model to predict churn
@@ -56,11 +54,15 @@ My initial thoughts are that property value will be dependent on the counties th
   * Run the final_report notebook
 
 # Conclusions
-  * 
+  * LassoLars performed better than baseline on unseen test data.
+  * This model will only be able to perform accurately on homes that fall within the upper and lower quartiles of the data.
 
 # Next Steps
-  * 
+   * Split the data by counties and run three seperate models.
+   * Try scaling data to see if it makes a difference in current model.
+   * Bathroom and bedroom counts are correlated - feature engineering a combined column.
+   * Explore different features in dataset.
 
 # Recommendations
-  * 
+  * Continue developing model.
   
