@@ -71,13 +71,15 @@ def clean_zillow(df):
     iqr_val = q3_val - q1_val
 
     #remove the outliers
+    # The 1.5 multiplied by the iqr is a standard deviation of 1.5. For a poisson distribution, standard dev
+    # equals the square root of the mean.
     df = df[~((df['bathcount']<(q1_bath-1.5*iqr_bath)) | (df['bathcount']>(q3_bath+1.5*iqr_bath)))]
 
-    df = df[~((df['bedcount']<(q1_bed-1.8*iqr_bed)) | (df['bedcount']>(q3_bed+1.8*iqr_bed)))]  
+    df = df[~((df['bedcount']<(q1_bed-1.5*iqr_bed)) | (df['bedcount']>(q3_bed+1.5*iqr_bed)))]  
 
-    df = df[~((df['sqfeet']<(q1_sqft-42*iqr_sqft)) | (df['sqfeet']>(q3_sqft+42*iqr_sqft)))]
+    df = df[~((df['sqfeet']<(q1_sqft-1.5*iqr_sqft)) | (df['sqfeet']>(q3_sqft+1.5*iqr_sqft)))]
 
-    df = df[~((df['value']<(q1_val-684*iqr_val)) | (df['value']>(q3_val+684*iqr_val)))]
+    df = df[~((df['value']<(q1_val-1.5*iqr_val)) | (df['value']>(q3_val+1.5*iqr_val)))]
 
     return df
 
@@ -115,9 +117,23 @@ def scaled_data(train, validate, test):
     train_scaled = pd.DataFrame(scaler.transform(train))
     validate_scaled = pd.DataFrame(scaler.transform(validate))
     test_scaled = pd.DataFrame(scaler.transform(test))
+
+    train_scaled = train_scaled.rename(columns={0:'bathcount', 1:'bedcount', 2:'sqfeet', 3: 'value'})
+    validate_scaled = validate_scaled.rename(columns={0:'bathcount', 1:'bedcount', 2:'sqfeet', 3:'value'})
+    test_scaled = test_scaled.rename(columns={0:'bathcount', 1:'bedcount', 2:'sqfeet', 3: 'value'})
     
     return train_scaled, validate_scaled, test_scaled
 
+##############################################   WRANGLE     ##############################################
+
+def wrangle_zillow():
+    '''This function acquires, cleans, and splits the zillow data.'''
+    
+    df = clean_zillow(get_zillow_data())
+
+    train, validate, test = split_zillow(df)
+
+    return train, validate, test
 
 ##############################################  MODEL SPLIT    ##############################################
 
@@ -136,7 +152,7 @@ def zillow_model_split(train, validate, test):
 
     y_validate = validate.value
 
-    X_test = test.drop(columns='value')
+    X_test = test.drop(columns=['value', 'county'])
 
     y_test = test.value
 
